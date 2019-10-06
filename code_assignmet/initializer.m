@@ -24,15 +24,21 @@ L(3)=Link(DH(3,1:6), mdh);
 L(4)=Link(DH(4,1:6), mdh);
 L(5)=Link(DH(5,1:6), mdh);
 
+% use robot with tool tip 
 robot=cork2mine(DH,3,mdh);
-
-
+% initialize tool tip 
 serial= SerialLink(L);
+% get homo of last joint
 homo=homo_mat(robot);
 homo=homo(:,:,6);
 homo=subs(homo,"t6",pi/2);
 homo=double(homo);
+% set it to tool tip 
 serial.tool=SE3(homo);
+
+% get robot without last frame (tooltip)
+robot=cork2mine(DH(1:5,:),3,mdh);
+
 
 
 
