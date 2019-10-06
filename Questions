@@ -1,0 +1,5 @@
+1. Why my transformation is different from fkine? Commands:
+- dh_params
+- T=trans_mat(robot,[1 5])
+- vec_subs(T,"all",[0 0 0 0 0])
+- serial.fkine([0 0 0 0 0 ])
