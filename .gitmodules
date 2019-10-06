@@ -1,0 +1,3 @@
+[submodule "robotic1"]
+	path = robotic1
+	url = https://gitlab.com/nicofirst1/robotic1.git

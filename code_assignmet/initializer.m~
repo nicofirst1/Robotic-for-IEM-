@@ -29,10 +29,7 @@ robot=cork2mine(DH,3,mdh);
 
 serial= SerialLink(L);
 homo=homo_mat(robot);
-homo=homo(:,:,6);
-homo=subs(homo,"t6",pi/2);
-homo=double(homo);
-serial.tool=SE3(homo);
+serial.tool=T;
 
 
 
