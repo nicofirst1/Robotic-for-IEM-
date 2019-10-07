@@ -7,7 +7,7 @@ clear;
 % this is done in order to get a feaseble end point in the cartesian space
 
 Qi=[0,pi/2, 0, pi, pi/4];
-Qf=[0,-pi/2,-pi/4,0,pi/7];
+Qf=[0,-pi/4,-pi/4,0,pi/7];
 
 Pi= get_feasable_point(pArb,Qi);
 Pf = get_feasable_point(pArb,Qf);
@@ -18,7 +18,7 @@ t=get_t(0,3,0.1);
 %% Joint Trajectory
 
 
-%joint_traj(Qi,Qf,t,pArb);
+joint_traj(Qi,Qf,t,pArb);
 
 %% Cartesian Trajectory
 
@@ -45,7 +45,7 @@ figure(1);
 plot_qs(q,qd,qdd,t,pe);
 
 
-figure(3);
+figure(2);
 scatter3(pe(1,:),pe(2,:),pe(3,:));
 zlabel("Z");
 ylabel("Y");
@@ -54,7 +54,7 @@ title("Cartesian coord. for end-effector")
 
 
 % plot robot movement
-figure(2);
+figure(3);
 view(3);
 pArb.plot(q, 'loop');
 
@@ -72,14 +72,34 @@ function cartesian_traj(Pi,Pf,t,pArb)
 Tf = SE3(Pf);
 Ti = SE3(Pi);
 
+% get list of transformation matrices
+Tc=ctraj(Ti,Tf,length(t));
+% get end effector position for plotting
+pe = transl(Tc)';
+% get robot configurations 
+mask=[1 1 1 1 0 0];
+q = pArb.ikine(Tc,'mask',mask);
 
-Tc=ctraj(Ti,Tf,length(t))
-Pe = transl(Tc)
 
-plot(t,Pe);
-title('End effecotr position');
-legend('x','y','z');
 
+figure(4);
+scatter3(pe(1,:),pe(2,:),pe(3,:));
+zlabel("Z");
+ylabel("Y");
+xlabel("X");
+title("Cartesian coord. for end-effector")
+
+figure(7);
+zrs=zeros(1,size(q,2));
+qd=[diff(q) ;zrs ];
+qdd=[diff(qd); zrs];
+plot_qs(q,qd,qdd,t,pe);
+
+
+% plot robot movement
+figure(6);
+view(3);
+pArb.plot(q, 'loop');
 
 
 end
