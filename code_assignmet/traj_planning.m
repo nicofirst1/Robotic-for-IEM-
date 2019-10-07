@@ -12,9 +12,28 @@ Qf=[0,-pi/2,-pi/4,0,pi/7];
 Pi= get_feasable_point(pArb,Qi);
 Pf = get_feasable_point(pArb,Qf);
 
-t=get_t(0,3,0.3);
+t=get_t(0,3,0.1);
+
 
 %% Joint Trajectory
+
+
+%joint_traj(Qi,Qf,t,pArb);
+
+%% Cartesian Trajectory
+
+cartesian_traj(Pi,Pf,t,pArb)
+
+
+%% Utils Functions
+
+
+function joint_traj(Qi,Qf,t,pArb)
+% Plan and plot trajectory in the cartesian space,
+% Qi/Qf: start and end for the robot configuration
+% pArb: serialLink
+% t: is the timing step
+
 
 % get the values of configuration 
 [q,qd,qdd]=jtraj(Qi,Qf,t);
@@ -27,8 +46,11 @@ plot_qs(q,qd,qdd,t,pe);
 
 
 figure(3);
-
-pcshow(pe);
+scatter3(pe(1,:),pe(2,:),pe(3,:));
+zlabel("Z");
+ylabel("Y");
+xlabel("X");
+title("Cartesian coord. for end-effector")
 
 
 % plot robot movement
@@ -37,15 +59,9 @@ view(3);
 pArb.plot(q, 'loop');
 
 
+end
 
-%% Cartesian Trajectory
-
-%cartesian_traj(Pi,Pf,pArb,t)
-
-
-%% Utils Functions
-
-function cartesian_traj(Pi,Pf,pArb,t)
+function cartesian_traj(Pi,Pf,t,pArb)
 % Plan trajectory in the cartesian space,
 % Pi/Pf: start and end for the end effector cartesian position
 % pArb: serialLink
