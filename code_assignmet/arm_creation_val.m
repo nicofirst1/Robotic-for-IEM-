@@ -1,9 +1,9 @@
 clc;
 clear;
 % plot robot 
-[robot,pArb]=initializer();
+[robot,pArb]=initializer("ax18");
 
-plot_f=0;
+plot_f=1;
 validate_f=1;
 
 if plot_f
@@ -12,13 +12,17 @@ if plot_f
     qs=[0,pi/2,pi/2,0,0];
     
 
-    view(3);
     figure(1);
-    %pArb1.plot(q0,'scale',.5);
-
+    title("Robot in zero configuration");
     view(3);
+    pArb.plot(q0,'scale',.5);
+
     figure(2);
-    pArb.plot(qs,'scale',.5);
+    [robot,pArb2]=initializer("bob");
+
+    title("Robot in default configuration");
+    view(3);
+    pArb2.plot(qs,'scale',.5);
 end
 
 

@@ -2,7 +2,7 @@ function [p,R] = fk(q)
 %FK Summary of this function goes here
 %   Detailed explanation goes here
 
-[robot, serial]=initializer();
+[robot, serial]=initializer("ax18");
 
 
 

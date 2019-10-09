@@ -2,7 +2,7 @@ function [q] = ik(p)
 %FK Summary of this function goes here
 %   Detailed explanation goes here
 
-[robot, serial]=initializer();
+[robot, serial]=initializer("ax18");
 
 
 %todo

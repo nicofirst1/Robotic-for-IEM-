@@ -1,7 +1,7 @@
 clear;
 clc;
 
-[robot,pArb]=initializer();
+[robot,pArb]=initializer("ax18");
 
    
 %% Initial configuration
@@ -56,6 +56,9 @@ pe = transl(Tc)';
 mask=[1 1 1 1 0 0];
 q = pArb.ikine(Tc,'mask',mask);
 
+%%%%%%%%%%%
+% Uncomment get_joint_coord to get different movements, it's slow
+%%%%%%%%%%%
 
 %j_points=get_joint_coord(q,robot);
 load('j_points.mat');

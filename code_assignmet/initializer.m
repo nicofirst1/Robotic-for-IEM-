@@ -1,4 +1,4 @@
-function [robot,serial] = initializer()
+function [robot,serial] = initializer(robot_name)
 
 
 % Link(DH, OPTIONS) is a link object using the specified kinematic
@@ -27,7 +27,7 @@ L(5)=Link(DH(5,1:6), mdh);
 % use robot with tool tip 
 robot=cork2mine(DH(1:5,:),3,mdh,DH(6,:));
 % initialize tool tip 
-serial= SerialLink(L);
+serial= SerialLink(L,'name',robot_name);
 % get homo of last joint
 
 % set it to tool tip 

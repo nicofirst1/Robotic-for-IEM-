@@ -1,7 +1,8 @@
 clear;
 clc;
 
-[robot,pArb]=initializer();
+[robot,pArb_j]=initializer("ax18-joint");
+[robot,pArb_c]=initializer("ax18-cartesian");
 
    
 %% Initial configuration
@@ -11,8 +12,8 @@ clc;
 Qi=[0,pi/2, pi/2, pi,0 ];
 Qf=[pi,-pi/4,-pi/4,pi,pi];
 
-Pi= get_feasable_point(pArb,Qi);
-Pf = get_feasable_point(pArb,Qf);
+Pi= get_feasable_point(pArb_j,Qi);
+Pf = get_feasable_point(pArb_j,Qf);
 
 t=get_t(0,3,0.1);
 
@@ -20,10 +21,10 @@ t=get_t(0,3,0.1);
 %% Joint Trajectory
 
 
-joint_traj(Qi,Qf,t,pArb);
+joint_traj(Qi,Qf,t,pArb_j);
 
 %% Cartesian Trajectory
-cartesian_traj(Pi,Pf,t,pArb)
+cartesian_traj(Pi,Pf,t,pArb_c)
 
 
 %% Utils Functions
