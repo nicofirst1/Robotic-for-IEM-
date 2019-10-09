@@ -16,7 +16,7 @@ function [robot,serial] = initializer()
 % 'prismatic'   for a prismatic joint, can be abbreviated to 'p'
 
 
-[DH mdh]=dh_params();
+[DH,mdh]=dh_params();
 
 L(1)=Link(DH(1,1:6), mdh);
 L(2)=Link(DH(2,1:6), mdh);
