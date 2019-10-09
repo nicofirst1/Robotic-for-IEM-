@@ -1,13 +1,15 @@
 clear;
+clc;
 
 [robot,pArb]=initializer();
+
    
 %% Initial configuration
 % getting feasable cartesian position with forward kin
 % this is done in order to get a feaseble end point in the cartesian space
 
-Qi=[0,pi/2, 0, pi, pi/4];
-Qf=[0,-pi/4,-pi/4,0,pi/7];
+Qi=[0,pi/2, pi/2, pi,0 ];
+Qf=[pi,-pi/4,-pi/4,pi,pi];
 
 Pi= get_feasable_point(pArb,Qi);
 Pf = get_feasable_point(pArb,Qf);
@@ -21,7 +23,6 @@ t=get_t(0,3,0.1);
 joint_traj(Qi,Qf,t,pArb);
 
 %% Cartesian Trajectory
-
 cartesian_traj(Pi,Pf,t,pArb)
 
 
@@ -50,13 +51,15 @@ scatter3(pe(1,:),pe(2,:),pe(3,:));
 zlabel("Z");
 ylabel("Y");
 xlabel("X");
-title("Cartesian coord. for end-effector")
+title("Cartesian coord. for end-effector in Joint")
 
 
 % plot robot movement
 figure(3);
 view(3);
-pArb.plot(q, 'loop');
+title("Joint Trajectory")
+pArb.plot(q);
+
 
 
 end
@@ -99,7 +102,8 @@ plot_qs(q,qd,qdd,t,pe);
 % plot robot movement
 figure(6);
 view(3);
-pArb.plot(q, 'loop');
+title("Cartesian Trajectory")
+pArb.plot(q);
 
 
 end
