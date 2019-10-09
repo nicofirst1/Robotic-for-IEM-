@@ -6,7 +6,7 @@ function [p,R] = fk(q)
 
 
 
-T=trans_mat(robot,[1 robot.ndof]);
+T=trans_from_robot(robot,"all");
 T=vec_subs(T,"all",q);
 p=T(1:3,4);
 R=T(1:3,1:3);
