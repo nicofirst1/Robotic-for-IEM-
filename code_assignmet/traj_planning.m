@@ -43,7 +43,7 @@ pe=pArb.fkine(q).tv;
 
 % plot 
 figure(1);
-plot_qs(q,qd,qdd,t,pe);
+plot_qs(q,qd,qdd,t,pe,'[Joint Traj]');
 
 
 figure(2);
@@ -51,13 +51,13 @@ scatter3(pe(1,:),pe(2,:),pe(3,:));
 zlabel("Z");
 ylabel("Y");
 xlabel("X");
-title("Cartesian coord. for end-effector in Joint")
+title("[Joint Traj] Cartesian coord. for end-effector in Joint")
 
 
 % plot robot movement
 figure(3);
 view(3);
-title("Joint Trajectory")
+title("[Joint Traj] Joint Trajectory")
 pArb.plot(q);
 
 
@@ -90,19 +90,19 @@ scatter3(pe(1,:),pe(2,:),pe(3,:));
 zlabel("Z");
 ylabel("Y");
 xlabel("X");
-title("Cartesian coord. for end-effector")
+title("[Cart. Traj] Cartesian coord. for end-effector")
 
 figure(7);
 zrs=zeros(1,size(q,2));
 qd=[diff(q) ;zrs ];
 qdd=[diff(qd); zrs];
-plot_qs(q,qd,qdd,t,pe);
+plot_qs(q,qd,qdd,t,pe,'[Cart. Traj]');
 
 
 % plot robot movement
 figure(6);
 view(3);
-title("Cartesian Trajectory")
+title("[Cart. Traj] Cartesian Trajectory")
 pArb.plot(q);
 
 
@@ -133,13 +133,13 @@ end
 
 
 
-function plot_qs(q,qd,qdd,t,pe)
+function plot_qs(q,qd,qdd,t,pe,tit)
 
 
 % thetas position
 nexttile;
 plot(t,q);
-title('Joint position');
+title(strcat(tit,' Joint position'));
 legend('q1','q2','q3','q4','q5');
 xlabel("seconds");
 ylabel("rad");
@@ -147,7 +147,7 @@ ylabel("rad");
 % thetas vel
 nexttile;
 plot(t,qd);
-title('Joint velocity');
+title(strcat(tit,' Joint velocity'));
 legend('qd1','qd2','qd3','qd4','qd5');
 xlabel("seconds");
 ylabel("rad/s");
@@ -156,7 +156,7 @@ ylabel("rad/s");
 % thetas accel
 nexttile;
 plot(t,qdd);
-title('Joint accleration');
+title(strcat(tit,' Joint accleration'));
 legend('qdd1','qdd2','qdd3','qdd4','qdd5');
 xlabel("seconds");
 ylabel("rad/s^2");
@@ -165,7 +165,7 @@ ylabel("rad/s^2");
 % endeffector position 
 nexttile;
 plot(t,pe);
-title('End effector coordinates');
+title(strcat(tit,' End effector coordinates'));
 legend('x','y','z');
 xlabel("seconds");
 ylabel("coord");
