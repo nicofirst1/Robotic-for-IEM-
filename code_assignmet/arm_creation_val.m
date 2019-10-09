@@ -1,4 +1,5 @@
-
+clc;
+clear;
 % plot robot 
 [robot,pArb]=initializer();
 
@@ -6,13 +7,18 @@ plot_f=0;
 validate_f=1;
 
 if plot_f
+    
+    q0=[0,0,0,0,0];
+    qs=[0,pi/2,pi/2,0,0];
+    
+
     view(3);
     figure(1);
-    pArb.plot([0,0,0,0,0],'scale',.5);
+    %pArb1.plot(q0,'scale',.5);
 
     view(3);
     figure(2);
-    pArb.plot([0,-pi/2,-pi/2,0,0],'scale',.5);
+    pArb.plot(qs,'scale',.5);
 end
 
 
@@ -29,8 +35,9 @@ if validate_f
     
       
     pe_corke=pArb.fkine(qr).t;
-    pe_mine=pe_from_robot(robot);
-    pe_mine=vec_subs(pe_mine,"all",qr);
+    pe_mine=fk(qr);
+    %pe_mine=pe_from_robot(robot);
+    %pe_mine=vec_subs(pe_mine,"all",qr);
     pe_mine=double(pe_mine);
     
     
