@@ -17,6 +17,8 @@ Pf = get_feasable_point(pArb_j,Qf);
 
 t=get_t(0,3,0.1);
 
+fprintf("Trajectory will consist of %d points\n",length(t));
+
 
 %% Joint Trajectory
 
@@ -24,6 +26,7 @@ t=get_t(0,3,0.1);
 joint_traj(Qi,Qf,t,pArb_j);
 
 %% Cartesian Trajectory
+
 cartesian_traj(Pi,Pf,t,pArb_c)
 
 
@@ -36,18 +39,23 @@ function joint_traj(Qi,Qf,t,pArb)
 % pArb: serialLink
 % t: is the timing step
 
+disp("############################################")
+disp("Estimating trajectory in Joint space...")
+disp("############################################")
 
 % get the values of configuration 
 [q,qd,qdd]=jtraj(Qi,Qf,t);
 % extract the coordinates in the end effector frame
 pe=pArb.fkine(q).tv;
 
-% plot 
+%% Plots 
+disp("Plotting position, velocities and accelaration...")
 figure(1);
 plot_qs(q,qd,qdd,t,pe,'[Joint Traj]');
 
 
 figure(2);
+disp("Plotting end point position in cartesian space...")
 scatter3(pe(1,:),pe(2,:),pe(3,:));
 zlabel("Z");
 ylabel("Y");
@@ -56,6 +64,7 @@ title("[Joint Traj] Cartesian coord. for end-effector in Joint")
 
 
 % plot robot movement
+disp("Plotting robot movement...")
 figure(3);
 view(3);
 title("[Joint Traj] Joint Trajectory")
@@ -71,6 +80,9 @@ function cartesian_traj(Pi,Pf,t,pArb)
 % pArb: serialLink
 % t: is the timing step
 
+disp("############################################")
+disp("Estimating trajectory in Cartesian space...")
+disp("############################################")
 
 % transformation at end
 Tf = SE3(Pf);
@@ -84,8 +96,9 @@ pe = transl(Tc)';
 mask=[1 1 1 1 0 0];
 q = pArb.ikine(Tc,'mask',mask);
 
+%% Plots 
 
-
+disp("Plotting end point position in cartesian space...")
 figure(4);
 scatter3(pe(1,:),pe(2,:),pe(3,:));
 zlabel("Z");
@@ -93,6 +106,8 @@ ylabel("Y");
 xlabel("X");
 title("[Cart. Traj] Cartesian coord. for end-effector")
 
+
+disp("Plotting position, velocities and accelaration...")
 figure(7);
 zrs=zeros(1,size(q,2));
 qd=[diff(q) ;zrs ];
@@ -101,6 +116,7 @@ plot_qs(q,qd,qdd,t,pe,'[Cart. Traj]');
 
 
 % plot robot movement
+disp("Plotting robot movement...")
 figure(6);
 view(3);
 title("[Cart. Traj] Cartesian Trajectory")

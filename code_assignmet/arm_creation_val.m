@@ -34,22 +34,20 @@ if validate_f
     disp(qr')
   
     disp("########################")
-    disp("End effector position")
+    disp("Forward kinematic")
     disp("########################")
     
       
     pe_corke=pArb.fkine(qr).t;
     pe_mine=fk(qr);
-    %pe_mine=pe_from_robot(robot);
-    %pe_mine=vec_subs(pe_mine,"all",qr);
     pe_mine=double(pe_mine);
     
     
     
-    disp("Corke:")
+    disp("Corke end effector position:")
     disp(pe_corke)
     
-    disp("Ours:")
+    disp("Ours end effector position:")
     disp(pe_mine)
     
     
