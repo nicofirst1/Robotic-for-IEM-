@@ -25,7 +25,7 @@ L(4)=Link(DH(4,1:6), mdh);
 L(5)=Link(DH(5,1:6), mdh);
 
 % use robot with tool tip 
-robot=cork2mine(DH(1:5,:),3,mdh,DH(6,:));
+robot=corke2robot(DH(1:5,:),3,mdh,DH(6,:));
 % initialize tool tip 
 serial= SerialLink(L,'name',robot_name);
 % get homo of last joint
