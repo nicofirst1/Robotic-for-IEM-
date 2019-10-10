@@ -14,6 +14,7 @@ Qf=[pi/2,-pi/4,-pi/6,pi/2,pi/3];
 Pi= get_feasable_point(pArb,Qi);
 Pf = get_feasable_point(pArb,Qf);
 
+
 disp("Starting point:");
 disp(Pi);
 disp("Ending point:");
@@ -97,7 +98,7 @@ title("Joints trajectory in Cartesian space")
 view(3);
 hold on;
 
-label=["Link 1","Link 2","Link 3","Link 4","Link 5","tool"];
+label=["Joint 1","Joint 2","Joint 3","Joint 4","Joint 5","tool"];
 S = repmat([70,50,40,30,20,10],size(j_points,2),1);
 C = repmat([1,2,3,4,5,7],size(j_points,2),1);
 %iterate over every theta
