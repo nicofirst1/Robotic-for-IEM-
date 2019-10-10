@@ -7,12 +7,18 @@ clc;
 %% Initial configuration
 % getting feasable cartesian position with forward kin
 % this is done in order to get a feaseble end point in the cartesian space
+% below you can find the use of custom function ik, which is not effective
+% since for some points the robot may be outside of its working space.
+% During the lab course the Qi/Qf lines can be discarded
 
 Qi=[0,0, pi/2, 0,0 ];
 Qf=[pi/2,-pi/4,-pi/6,pi/2,pi/3];
 
 Pi= get_feasable_point(pArb,Qi);
 Pf = get_feasable_point(pArb,Qf);
+
+qi=ik(Pi);
+qf=ik(Pf);
 
 
 disp("Starting point:");
