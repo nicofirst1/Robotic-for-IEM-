@@ -4,7 +4,7 @@ MATLAB package solving Lab assignment for Robotics for IEM TBROB-12.2019-2020.1A
 
 To install this repo use the following command:
 
-` git clone https://gitlab.com/nicofirst1/roboticiem --recursive'
+`git clone https://gitlab.com/nicofirst1/roboticiem --recursive`
 
 If you do not have git installed then download the repository, download [robotic1](https://gitlab.com/nicofirst1/robotic1) too, place it inside the _roboticiem_ direcotry.
 
